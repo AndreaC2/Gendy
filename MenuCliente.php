@@ -13,11 +13,13 @@ if (isset($_SESSION["success"])) {
         <link rel="stylesheet" href="css/ingresar.css">
     </head>
     <body>
+        <?php if (!isset($_SESSION["user"])) { ?>
         <?php
-        if ( ! isset($_SESSION["correo"]) ) { ?>
-        <?php } else { ?>
-            <p>This is where a cool application would be.</p>
-            <p>Please <a href="CerrarSesion.php">Log Out</a> when you are done.</p>
-        <?php } ?>
+        } else {
+            echo($_SESSION["user"]);
+            ?>
+
+            <p>Para <a href="CerrarSesion.php">Cerrar Sesion</a><p>
+            <?php } ?>
     </body>
 </html> 

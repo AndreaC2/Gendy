@@ -8,13 +8,15 @@ body{
 
 .registro_Cliente{
     height: 700px;
-    width: 600px;
+    width: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-60%, -60%);
-    display:inline-block;
-    float:left;
+    transform: translate(-50%, -70%);
+    border: 1px;
+    margin: 0 auto;
+    padding: 70px 30px;
+    box-sizing: border-box;
 }
 
 .registro_Cliente h1{
@@ -26,7 +28,7 @@ body{
 
 .registro_Cliente h2{
     margin: 1px;
-    padding: 10px;
+    padding: 30px;
     text-align: center;
     font-size: 80px;
 }
@@ -34,14 +36,13 @@ body{
 .registro_Cliente label{
     margin: 1px;
     padding: 8px;
+    display:block;  
     font-weight: bold;
     font-size: 15px;
-    text-align: left;
-    display:block;  
 }
 
 .registro_Cliente input {
-    width: 80%;
+    width: 95%;
     margin-bottom: 20px;
 }
 
@@ -50,12 +51,10 @@ body{
     border-style: solid;
     border-color: #cccccc;
     border-width: 1px;
-    height: 25px;
+    height: 35px;
     color: #003B80;
     background: #FFFFFF;
     font-size: 15px;
-    margin: 2px;
-    padding: 10px;
 }
 
 .registro_Cliente input[type="submit"] {
@@ -68,7 +67,7 @@ body{
     border-radius: 10px;
     border: none;
     text-align: center;
-    transform: translateX(30%);
+    transform: translateX(25%);
 }
 
 .registro_Cliente a{

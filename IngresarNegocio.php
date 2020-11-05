@@ -1,10 +1,25 @@
 <?php
+require_once './DataBase.php';
+session_start();
+if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
+    unset($_SESSION['user']);
+    $sql = "SELECT * FROM gendy.negocio WHERE CORREO_ELECTRONICO_NEGOCIO=:correo and CONTRASENA_NEGOCIO=:contrasena ";
+    $datos = $conpdo->prepare($sql);
+    $datos->execute(array(
+        ':correo' => $_POST['correo'], 
+        ':contrasena' => $_POST['contrasena']));
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    $data= $datos->fetch(PDO::FETCH_ASSOC);
+    $numero = $datos->rowCount();
+    if ($numero == 1) {
+        $_SESSION['user'] = $data['ID_USUARIO'];
+        $_SESSION["success"] = "Logged in.";
+        header('Location: MenuCliente.php');
+        return;
+    } else {
+        $_SESSION["error"] = "Datos Incorrectos";
+    }
+}
 ?>
 <html>
     <head>

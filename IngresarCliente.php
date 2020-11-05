@@ -1,17 +1,18 @@
 <?php
-session_start();
 require_once './DataBase.php';
+session_start();
 if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
-    unset($_SESSION['correo']);
+    unset($_SESSION['user']);
     $sql = "SELECT * FROM gendy.usuario WHERE CORREO_ELECTRONICO=:correo and CONTRASENA=:contrasena ";
     $datos = $conpdo->prepare($sql);
     $datos->execute(array(
         ':correo' => $_POST['correo'], 
-        ':contrasena' => $_POST['contrasena'],));
+        ':contrasena' => $_POST['contrasena']));
 
+    $data= $datos->fetch(PDO::FETCH_ASSOC);
     $numero = $datos->rowCount();
     if ($numero == 1) {
-        $_SESSION['correo'] = $_POST['correo'];
+        $_SESSION['user'] = $data['ID_USUARIO'];
         $_SESSION["success"] = "Logged in.";
         header('Location: MenuCliente.php');
         return;
@@ -42,11 +43,11 @@ if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
             <form method="post">
                 <!-- Datos correo -->
                 <label for="correo">Usuario:</label>                    
-                <input type="email" name="correo">
+                <input type="email" name="correo" value="">
 
                 <!-- Datos Contraseña -->
                 <label for="contrasena">Contraseña:</label>  
-                <input type="password" name="contrasena">
+                <input type="password" name="contrasena" value="">
 
                 <!-- boton Ingresar -->
                 <input type="submit" value="Ingresar" />
