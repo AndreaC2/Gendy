@@ -22,7 +22,7 @@ if (isset($_POST['nombre']) && isset($_POST['apodo']) && isset($_POST['contrasen
     <head>
         <meta charset="utf-8">
         <title>Gendy | Registro Cliente</title>
-        <link rel="stylesheet" href="css/registrarCliente.css">
+        <link rel="stylesheet" href="css/registrar.css">
     </head>
     <body>
         <div class="registro_Cliente">

@@ -12,7 +12,7 @@ if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
     $data= $datos->fetch(PDO::FETCH_ASSOC);
     $numero = $datos->rowCount();
     if ($numero == 1) {
-        $_SESSION['user'] = $data['ID_USUARIO'];
+        $_SESSION['user'] = $data['ID_NEGOCIO'];
         $_SESSION["success"] = "Logged in.";
         header('Location: MenuCliente.php');
         return;

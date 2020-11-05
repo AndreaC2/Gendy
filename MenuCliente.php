@@ -18,7 +18,6 @@ if (isset($_SESSION["success"])) {
         } else {
             echo($_SESSION["user"]);
             ?>
-
             <p>Para <a href="CerrarSesion.php">Cerrar Sesion</a><p>
             <?php } ?>
     </body>
