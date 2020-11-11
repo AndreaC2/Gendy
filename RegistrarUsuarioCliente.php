@@ -1,21 +1,26 @@
 <?php
 session_start();
 require_once './DataBase.php';
-if (isset($_POST['nombre']) && isset($_POST['apodo']) && isset($_POST['contrasena']) &&
-        isset($_POST['correo']) &&
-        isset($_POST['telefono'])) {
-    $sql = "INSERT INTO gendy.usuario(`NOMBRE_USUARIO`, `APODO_USUARIO`, `CONTRASENA`, `CORREO_ELECTRONICO`, `TELEFONO`) "
-            . "VALUES (:nombre,:apodo,:contrasena,:correo,:telefono)";
-    //revisa si la sintaxis de sql esta correcta, protege los datos de la DB
-    $datos = $conpdo->prepare($sql);
-    $datos->execute(array(
-        //: protegen la base de datos no usar $
-        ':nombre' => $_POST['nombre'],
-        ':apodo' => $_POST['apodo'],
-        ':contrasena' => $_POST['contrasena'],
-        ':correo' => $_POST['correo'],
-        ':telefono' => $_POST['telefono']));
-    header('Location: IngresarCliente.php');
+try {
+    if (isset($_POST['nombre']) && isset($_POST['correo']) && isset($_POST['contrasena']) &&
+            isset($_POST['apodo']) && isset($_POST['telefono']) && !empty($_POST['nombre']) &&
+            !empty($_POST['correo']) && !empty($_POST['contrasena']) && !empty($_POST['apodo']) && !empty($_POST['telefono'])) {
+
+        $sql = "INSERT INTO gendy.usuario(`NOMBRE_USUARIO`, `APODO_USUARIO`, `CONTRASENA`, `CORREO_ELECTRONICO`, `TELEFONO`) "
+                . "VALUES (:nombre,:apodo,:contrasena,:correo,:telefono)";
+        //revisa si la sintaxis de sql esta correcta, protege los datos de la DB
+        $datos = $conpdo->prepare($sql);
+        $datos->execute(array(
+            //: protegen la base de datos no usar $
+            ':nombre' => $_POST['nombre'],
+            ':apodo' => $_POST['apodo'],
+            ':contrasena' => $_POST['contrasena'],
+            ':correo' => $_POST['correo'],
+            ':telefono' => $_POST['telefono']));
+        header('Location: IngresarCliente.php');
+    }
+} catch (Exception $ex) {
+    echo $e->getMessage();
 }
 ?>
 <html>
