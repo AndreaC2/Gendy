@@ -1,0 +1,16 @@
+body{
+    background: #EFEFEF;
+    margin: 1%;
+    padding: 50px;
+    font-family: Open Sans, sans-serif;
+    color: #003B80;
+}
+
+.registro_Cliente label{
+    margin: 1px;
+    padding: 8px;
+    display:block;  
+    font-weight: bold;
+    font-size: 15px;
+}
+
