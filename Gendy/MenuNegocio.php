@@ -1,3 +1,9 @@
+<?php
+
+$a = Juan
+
+?>
+
 <html>
 
     <head>
@@ -12,7 +18,13 @@
             
 
                 <div class="titulo"> 
-                <p>¡Hola!, </p>
+                <p>¡Hola! 
+
+                <?php
+                echo($a)
+                ?>
+                
+                </p>
                 <p>¿En que te podemos ayudar?</p>
                 
                     <div class="botones">
