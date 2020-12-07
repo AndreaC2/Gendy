@@ -1,28 +1,44 @@
 <?php
 session_start();
-require_once './DataBase.php';
+require_once 'DataBase.php';
 try {
     if (isset($_POST['nombre']) && isset($_POST['correo']) && isset($_POST['contrasena']) &&
-            isset($_POST['apodo']) && isset($_POST['telefono']) && !empty($_POST['nombre']) &&
-            !empty($_POST['correo']) && !empty($_POST['contrasena']) && !empty($_POST['apodo']) && !empty($_POST['telefono'])) {
+            isset($_POST['apodo']) && isset($_POST['telefono']) && !empty($_POST['nombre']) && !empty($_POST['correo']) && 
+            !empty($_POST['contrasena']) && !empty($_POST['apodo']) && !empty($_POST['telefono'])  ){
 
-        $sql = "INSERT INTO gendy.usuario(`NOMBRE_USUARIO`, `APODO_USUARIO`, `CONTRASENA`, `CORREO_ELECTRONICO`, `TELEFONO`) "
-                . "VALUES (:nombre,:apodo,:contrasena,:correo,:telefono)";
-        //revisa si la sintaxis de sql esta correcta, protege los datos de la DB
-        $datos = $conpdo->prepare($sql);
+        $sql2="SELECT `ID_USUARIO` FROM gendy.usuario";        
+
+        $num=$DB->prepare($sql2); 
+        $num->execute();
+        $numero=$num->rowCount();
+        $numero=$numero+1;        
+
+        $sql1 = "INSERT INTO gendy.usuario(`ID_USUARIO`,`NOMBRE_USUARIO`, `APODO_USUARIO`, `CONTRASENA`, `CORREO_ELECTRONICO`, 
+        `TELEFONO`,`PUNTAJE_USUARIO`) VALUES (:id,:nombre,:apodo,:contrasena,:correo,:telefono,:puntaje)";
+
+        $datos = $DB->prepare($sql1);
+
         $datos->execute(array(
-            //: protegen la base de datos no usar $
-            ':nombre' => $_POST['nombre'],
+            
+            ':id'=> $numero, 
+            ':nombre' => $_POST['nombre'], 
             ':apodo' => $_POST['apodo'],
             ':contrasena' => $_POST['contrasena'],
-            ':correo' => $_POST['correo'],
+            ':correo' => $_POST['correo'], 
+            ':puntaje' => 5,
             ':telefono' => $_POST['telefono']));
+
         header('Location: IngresarCliente.php');
     }
+
+
+
 } catch (Exception $ex) {
     echo $e->getMessage();
 }
 ?>
+
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -43,7 +59,7 @@ try {
                 <label>Contraseña:</label>
                 <input type="password" name="contrasena">
                 <label>Telefono:</label>
-                <input type="number" name="telefono">
+                <input type="text" name="telefono">
                 <input type="submit" value="Registrar" />
             </form>
         </div>

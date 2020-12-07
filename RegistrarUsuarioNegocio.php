@@ -1,23 +1,39 @@
 <?php
 session_start();
-require_once './DataBase.php';
+require_once 'DataBase.php';
 try {
     if (isset($_POST['razon']) && isset($_POST['correo']) && isset($_POST['contrasena']) &&
             isset($_POST['direccion']) && isset($_POST['telefono']) && isset($_POST['localidad']) &&
             !empty($_POST['razon']) && !empty($_POST['correo']) && !empty($_POST['contrasena']) &&
             !empty($_POST['direccion']) && !empty($_POST['telefono']) && !empty($_POST['localidad'])) {
-        $sql = "INSERT INTO gendy.negocio(`RAZON_SOCIAL`, `CONTRASENA_NEGOCIO`, `CORREO_ELECTRONICO_NEGOCIO`, `TELEFONO_NEGOCIO`, `DIRECCION_NEGOCIO`, `LOCALIDAD`) "
-                . "VALUES (:razon,:contrasena,:correo,:telefono,:direccion,:localidad)";
-        //revisa si la sintaxis de sql esta correcta, protege los datos de la DB
-        $datos = $conpdo->prepare($sql);
+         
+                $sql2="SELECT `ID_NEGOCIO` FROM gendy.negocio";        
+
+                $num=$DB->prepare($sql2); 
+                $num->execute();
+                $numero=$num->rowCount();
+                $numero=$numero+1;                
+
+                
+        $sql = "INSERT INTO gendy.negocio(`ID_NEGOCIO`,`RAZON_SOCIAL`, `CONTRASENA_NEGOCIO`, `CORREO_ELECTRONICO_NEGOCIO`, 
+        `TELEFONO_NEGOCIA`, `DIRECCION_NEGOCIO`, `LOCALIDAD`,`PUNTAJE_NEGOCIO`) VALUES (:id,:razon,:contrasena,
+        :correo,:telefono,:direccion,:localidad,:puntaje)";
+
+
+        $datos = $DB->prepare($sql);
         $datos->execute(array(
-            //: protegen la base de datos no usar $
+
+            
+            ':id' => $numero,
             ':razon' => $_POST['razon'],
             ':contrasena' => $_POST['contrasena'],
             ':correo' => $_POST['correo'],
             ':telefono' => $_POST['telefono'],
             ':direccion' => $_POST['direccion'],
+            ':puntaje' => 5,
             ':localidad' => $_POST['localidad']));
+
+
         header('Location: IngresarNegocio.php');
     }
 } catch (Exception $ex) {
@@ -43,7 +59,7 @@ try {
                 <label>Contraseña:</label>
                 <input type="password" name="contrasena">
                 <label>Telefono:</label>
-                <input type="number" name="telefono">
+                <input type="text" name="telefono">
                 <label>Direccion:</label>
                 <input type="text" name="direccion">
                 <label>Localidad:</label>
