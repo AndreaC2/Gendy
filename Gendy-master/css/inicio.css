@@ -1,0 +1,51 @@
+body{
+    background: #003B80;
+    padding-top: 10%;
+    font-family: Ancizar Sans, sans-serif;
+    font-size: x-large;
+    color: #efefef;
+    text-align: center;
+}
+
+.titulo{
+    font-size: 45px;
+}
+
+.boton_negocio{
+    height: 35px;
+    width: 200px;
+    background: #efefef;
+    color: #003B80;
+    font-size: large;
+    border-radius: 10px;
+    border: none;
+}
+.boton_negocio:hover{
+    height: 35px;
+    width: 200px;
+    background: #091D36;
+    color: #efefef;
+    font-size: large;
+    border-radius: 10px;
+    border: none;
+}
+
+.boton_cliente{
+    height: 35px;
+    width: 200px;
+    background: #efefef;
+    color: #003B80;
+    font-size: large;
+    border-radius: 10px;
+    border: none;
+}
+
+.boton_cliente:hover{
+    height: 35px;
+    width: 200px;
+    background: #091D36;
+    color: #efefef;
+    font-size: large;
+    border-radius: 10px;
+    border: none;
+}
