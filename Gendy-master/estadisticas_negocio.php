@@ -78,7 +78,7 @@ $c=$_SESSION['user'];
     
         var options = {
             title: 'Días más visitados',
-            width: 650,
+            width: 700,
             height: 400,
         };
     
@@ -93,17 +93,24 @@ $c=$_SESSION['user'];
     <body>
             <?php echo($horas->num_rows); ?>
             <h1>Estadisticas del negocio</h1>
+
             <div class="cuerpo">
             
-            <p>
-            En esta sección encontrará las estadisticas de su establecimiento. Podrá observar el número
-            de visitas por día, y el porcentaje que esto representa.
-            </p>
+                <p>
+                En esta sección encontrará las estadisticas de su establecimiento. Podrá observar el número
+                de visitas por día, y el porcentaje que esto representa.
+                </p>
 
-            <h2>Fecuencia de visitas</h2>
+                <h2>Fecuencia de visitas</h2>
 
-            <div id="piechart"></div>
+                <div id="piechart"></div>
 
+                </div>
+                <br>
+
+                <form action="MenuNegocio.php" >
+                        <input class="boton_volver" type="submit" value="Volver" name='Volver' onclick="" />
+                </form>
             </div>
     </body>
 </html>

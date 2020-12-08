@@ -47,9 +47,13 @@ $c=$_SESSION['user'];
                     <br><br>
                     </form>
 
-                    <form action="ajustes_negocio.php" >
+                    <form action="ajustes_negocio_pre.php" >
                     <input class="boton_ajustes" type="submit" value="Ajustes del negocio" name='Ajustes del negocio' onclick="" />
                     <br><br>
+                    </form>
+
+                    <form action="CerrarSesion.php" >
+                        <input class="CerrarSesion" type="submit" value="Cerrar sesion" name='Cerrar sesion' onclick="" />
                     </form>
 
                     </div>

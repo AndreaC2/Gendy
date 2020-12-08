@@ -51,6 +51,17 @@ if(!empty($_POST['localidad'])){
     header('Location: MenuNegocio.php');
 }
 
+if(!empty($_POST['aforo'])){
+    $sql = "UPDATE `negocio` SET `AFORO` = :loc WHERE `negocio`.`ID_NEGOCIO`=$c";
+    $lun=$DB->prepare($sql);
+    $lun->setFetchMode(PDO::FETCH_ASSOC);
+    $lun->execute(array(':loc' => $_POST['aforo']));
+    header('Location: MenuNegocio.php');
+}
+
+
+
+
 ?>
 
 
@@ -59,28 +70,44 @@ if(!empty($_POST['localidad'])){
     <head>
         <meta charset="utf-8">
         <title>Gendy | Ajustes Negocio</title>
-        <link rel="stylesheet" href="css/registrar.css">
+        <link rel="stylesheet" href="css/ajustes.css">
     </head>
     <body>
 
-        <div class="registro_Cliente">
-            <h2>Ajustes del negocio</h2>
-            <h1>Ingrese los valores que desea modificar. Puede dejar en blanco los datos que no va a modificar</h1>
-            <form method="post">
-                <label>Razon Social:</label>
-                <input type="text" name="razon">  
-                <label>Correo Electronico:</label>
-                <input type="email" name="correo">
-                <label>Contraseña:</label>
-                <input type="password" name="contrasena">
-                <label>Telefono:</label>
-                <input type="text" name="telefono">
-                <label>Direccion:</label>
-                <input type="text" name="direccion">
-                <label>Localidad:</label>
-                <input type="text" name="localidad">
-                <input type="submit" value="Modificar" />
-            </form>
+        <div class="titulo">
+            <h1>Ajustes del negocio</h1>
+            <p>Ingrese los valores que desea modificar. Puede dejar en blanco los datos que no va a modificar</p>
+
+            <div class = "botones">
+
+
+
+                <form method="post">
+                    <label>Razon Social:</label>
+                    <input type="text" name="razon">  
+                    <label>Correo Electronico:</label>
+                    <input type="email" name="correo">
+                    <label>Contraseña:</label>
+                    <input type="password" name="contrasena">
+                    <label>Telefono:</label>
+                    <input type="text" name="telefono">
+                    <label>Direccion:</label>
+                    <input type="text" name="direccion">
+                    <label>Localidad:</label>
+                    <input type="text" name="localidad">
+                    <label>Aforo permitido</label>
+                    <input type="text" name="aforo">
+                    <input type="submit" value="Modificar" />
+
+                </form>
+
+                <form action="ajustes_negocio_pre.php" >
+                        <input class="boton_volver" type="submit" value="Volver" name='Volver' onclick="" />
+                </form>
+
+
+
+            </div>
         </div>
             
 

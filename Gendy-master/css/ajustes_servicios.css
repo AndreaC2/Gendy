@@ -13,14 +13,13 @@ body{
 }
 
 .titulo{
-    padding-left: 3%;
+
     font-size: large;
 }
 
 .botones{
     font-size: medium;
     font-weight: bold;
-
 }
 
 
@@ -68,6 +67,7 @@ body{
 
     
 }
+
 
 .boton_volver{
 

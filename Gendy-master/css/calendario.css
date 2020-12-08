@@ -5,10 +5,41 @@ body{
     padding-right: 10%;
     padding-bottom: 2%;
     font-family: Ancizar Sans, sans-serif;
-    font-size: x-large;
+    font-size: medium;
     color: #003B80;
+    margin-right: 15%;
 }
 
 .titulo{
-    padding-left: 3%;
+    font-size: x-large;
+}
+
+.boton_volver{
+
+    height: 35px;
+    width: 200px;
+    background: #003B80;
+    color: #EFEFEF;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+.boton_volver:hover{
+
+    height: 35px;
+    width: 200px;
+    background: #3A4E7A;
+    color: #EFEFEF;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    
 }
