@@ -36,7 +36,7 @@ body{
 .boton_calendario:hover{
     background:#3A4E7A;
     background-image: url(Imagenes/imagen_calendario_invertido.png);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;  
     color: #EFEFEF;
 }
