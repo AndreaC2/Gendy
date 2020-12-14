@@ -1,0 +1,165 @@
+body{
+    background: #00b4d8;
+    padding-top: 10%;
+    font-family: open sans, sans-serif;
+    font-size: large;
+    color: #efefef;
+    text-align: center;
+}
+
+.Logo{
+    width: 380px;
+}
+
+.separador{
+    padding: 15px;
+}
+
+.separador2{
+    padding: 100px;
+}
+
+.separador3{
+    padding: 5px;
+}
+
+.texto{
+    font-style: italic;
+    font-size: 20px;
+}
+
+.boton_negocio{
+    height: 50px;
+    width: 300px;
+    background: #efefef;
+    font-size: 25px;
+    color: #00b4d8;
+    border-radius: 50px;
+    border: none;
+}
+.boton_negocio:hover{
+    height: 50px;
+    width: 300px;
+    background: #00296b;
+    color: #efefef;
+    font-size: 25px;
+    border-radius: 50px;
+    border: none;
+}
+
+.boton_cliente{
+    height: 50px;
+    width: 300px;
+    background: #efefef;
+    font-size: 25px;
+    color: #00b4d8;
+    border-radius: 50px;
+    border: none;
+}
+
+.boton_cliente:hover{
+    height: 50px;
+    width: 300px;
+    background: #00296b;
+    color: #efefef;
+    font-size: 25px;
+    border-radius: 50px;
+    border: none;
+}
+.boton_crear{
+    height: 40px;
+    width: 200px;
+    background: #00296b;
+    color: #efefef;
+    font-size: 15px;
+    font-style: italic;
+    border-radius: 40px;
+    border: none;
+}
+
+.boton_crear:hover{
+    height: 40px;
+    width: 200px;
+    background: #efefef;
+    color: #00296b;
+    font-size: 15px;
+    font-style: italic;
+    border-radius: 40px;
+    border: none;
+}
+
+.iconos{
+    display: inline-grid;
+    height: 35px;
+    width: 200px;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconos input{
+    width: 60%;
+}
+
+.iconos input:hover{
+    width: 60%;
+}
+
+.contenedor{
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+
+}
+
+.registroInicio{
+    height: 400px;
+    width: 500px;
+    background: #00296b;
+    opacity: 0.95;
+    text-align: center;
+    padding: 50px;
+    position: relative;
+    border-radius: 100px;
+    top: 18%;
+}
+
+.logo2{
+    width: 250px;
+}
+
+.cerrar{
+    float:right; 
+}
+
+.iconosRegistro{
+    display: inline-grid;
+    height: 200px;
+    width: 300px;
+    grid-template-columns: 1fr 1fr;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.iconosRegistro input{
+    width: 90%;
+}
+
+.iconosRegistro input:hover{
+    width: 90%;
+}
+
+*:focus {
+    outline: none;
+}

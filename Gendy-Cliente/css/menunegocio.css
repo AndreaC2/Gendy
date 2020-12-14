@@ -1,0 +1,83 @@
+body{
+    background: #EFEFEF;
+    padding-top: 2%;
+    padding-left: 25%;
+    padding-right: 10%;
+    padding-bottom: 2%;
+    font-family: Ancizar Sans, sans-serif;
+    font-size: x-large;
+    color: #003B80;
+    margin-right: 25%;
+    margin-left: 5%;
+
+}
+
+.titulo{
+    padding-left: 3%;
+}
+
+.botones{
+    padding-left: 3%;
+    margin-right: 25%;
+}
+
+.boton_calendario{
+    background: #FFFFFF;
+    color: #3A4E7A;
+    font-size: large;
+    background-image: url(Imagenes/imagen_calendario.png);
+    background-size: contain;
+    background-repeat: no-repeat;  
+    width:450px;
+    height:100px;
+    padding-left: 25%;
+    border-radius: 20px;
+}
+.boton_calendario:hover{
+    background:#3A4E7A;
+    background-image: url(Imagenes/imagen_calendario_invertido.png);
+    background-size: cover;
+    background-repeat: no-repeat;  
+    color: #EFEFEF;
+}
+
+.boton_estadisticas{
+    background: #FFFFFF;
+    color: #3A4E7A;
+    font-size: large;
+    width:450px;
+    height:100px;
+    padding-left: 25%;
+    background-image: url(Imagenes/estadisticas_negocio.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+.boton_estadisticas:hover{
+    background:#3A4E7A;
+    background-image: url(Imagenes/estadisticas_invertido.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: #EFEFEF;
+}
+
+.boton_ajustes{
+    background: #FFFFFF;
+    color: #3A4E7A;
+    font-size: large;
+    width:450px;
+    height:100px;
+    padding-left: 25%;
+    background-image: url(Imagenes/llave_ajuste.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+
+.boton_ajustes:hover{
+    background:#3A4E7A;
+    color: #EFEFEF;
+    background-image: url(Imagenes/llave_invertido.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
