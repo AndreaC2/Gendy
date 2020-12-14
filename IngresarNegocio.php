@@ -1,25 +1,28 @@
 <?php
-require_once './DataBase.php';
+require_once 'DataBase.php';
 session_start();
 if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
     unset($_SESSION['user']);
     $sql = "SELECT * FROM gendy.negocio WHERE CORREO_ELECTRONICO_NEGOCIO=:correo and CONTRASENA_NEGOCIO=:contrasena ";
-    $datos = $conpdo->prepare($sql);
+    $datos = $DB->prepare($sql);
     $datos->execute(array(
         ':correo' => $_POST['correo'], 
         ':contrasena' => $_POST['contrasena']));
+
+
 
     $data= $datos->fetch(PDO::FETCH_ASSOC);
     $numero = $datos->rowCount();
     if ($numero == 1) {
         $_SESSION['user'] = $data['ID_NEGOCIO'];
         $_SESSION["success"] = "Logged in.";
-        header('Location: MenuCliente.php');
+        header('Location: Gendy-Negocio/MenuNegocio.php');
         return;
     } else {
         $_SESSION["error"] = "Datos Incorrectos";
     }
 }
+
 ?>
 <html>
     <head>
@@ -28,14 +31,20 @@ if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
         <link rel="stylesheet" href="css/ingresar.css">
     </head>
     <body>
+
+    <form action="index.php">
+            <input class="ret" type="image" src="css/Imagenes/retorno.png" name='ret' onclick="openForm()" />
+        </form>
+
         <div class="ingresar_Panel">
-            <h2>Gendy</h2>
+            <img class="Logo" src="css/Imagenes/-_Gendy azul.png" />
+            <br><br>
             <!-- Titulo de la caja -->
             <h1>Ingresar Negocio</h1>
             <!-- recoge los datos para procesar -->
             <form method="post">
                 <!-- Datos correo -->
-                <label for="correo">Usuario:</label>                    
+                <label for="correo">Correo Electrónico:</label>                    
                 <input type="email" name="correo">
 
                 <!-- Datos Contraseña -->
@@ -44,7 +53,7 @@ if (isset($_POST['correo']) && isset($_POST['contrasena'])) {
 
                 <!-- boton Ingresar -->
                 <input type="submit" value="Ingresar" />
-                <a href="RegistrarUsuarioNegocio.php">Registrarse</a><br>
+                <a href="RegistrarUsuarioNegocio.php">Registro inicial</a><br>
             </form>
         </div>
     </body>
