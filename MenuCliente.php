@@ -1,11 +1,12 @@
 <?php
 session_start();
+require_once 'DataBase.php';
 if (isset($_SESSION["success"])) {
-    //echo('<label style="color:green">' . $_SESSION["success"] . "</label>\n");
-    unset($_SESSION["success"]);
+//echo('<label style="color:green">' . $_SESSION["success"] . "</label>\n");
+} else {
+    header('Location: index.php');
 }
 ?> 
-
 <html>
     <head>
         <meta charset="utf-8">
@@ -31,8 +32,21 @@ if (isset($_SESSION["success"])) {
             <div class="informacionUsuario">
                 <img class="Logo" src="css/Imagenes/Mesa de trabajo 19.png" alt="Gendy"/>
                 <div class="informacionUsuario2">
+                    <label class="texto">¡Hola! 
+                        <?php
+                        $sql = "SELECT * FROM gendy.usuario WHERE usuario.ID_USUARIO =:usuario";
+                        $datosUser = $DB->prepare($sql);
+                        $datosUser->execute(array(':usuario' => $_SESSION['user']));
+                        while ($dataUser = $datosUser->fetch()) {
+                            echo('<label class ="texto">' . $dataUser["NOMBRE_USUARIO"] . '</label>');
+                        }
+                        ?>
+                    </label>
                 </div>
                 <div class="informacionUsuario3">
+                    <form action="CerrarSesion.php">
+                        <input class="boton_cerrar" type="submit" value="Cerrar Sesion" name='Cerrarsesion' onclick="" />
+                    </form>
                 </div>
             </div>
             <div class="Menuopciones">
@@ -43,19 +57,19 @@ if (isset($_SESSION["success"])) {
                         <label class="texto">Categorías<br></label>
                         <div class="separador2"></div>
                         <div class="categorias">
-                            <form action="IngresarCliente.php">
+                            <form method="post">
                                 <input class="categoriasboton1" type="submit" value="Fitness" name='Fitness' onclick="" />
                             </form>
-                            <form action="IngresarCliente.php">
+                            <form method="post">
                                 <input class="categoriasboton2" type="submit" value="Restaurantes" name='Restaurantes' onclick="" />
                             </form><!-- comment -->
-                            <form action="IngresarCliente.php">
+                            <form method="post">
                                 <input class="categoriasboton3" type="submit" value="Bienestar" name='Bienestar' onclick="" />
                             </form><!-- comment -->
-                            <form action="IngresarCliente.php">
+                            <form method="post">
                                 <input class="categoriasboton4" type="submit" value="Mecánico" name='Mecánico' onclick="" />
                             </form>
-                            <form action="IngresarCliente.php">
+                            <form method="post">
                                 <input class="categoriasboton5" type="submit" value="Belleza" name='Belleza' onclick="" />
                             </form>
                         </div>
@@ -65,18 +79,132 @@ if (isset($_SESSION["success"])) {
                     <div class="separador2"></div>
                     <div class="separador2"></div>
                     <div class="buscar">
-                        <form action="IngresarCliente.php">
-                            <input class="buscarboton" type="buscar" value="" placeholder="Busca tu servicio" name='buscar' onclick="" />
+                        <form action="">
+                            <input class="buscarboton" type="buscar" value="" placeholder="Busca tu servicio" name='buscar' onclick="mostrarServicios()" />
                         </form>  
                     </div>
-                    <div class="Servicios">
-                        
+                    <div class="separador2"></div>
+                    <div class="separador2"></div>
+                    <div class="separador2"></div>
+                    <div class="separador2"></div>
+                    <div class="separador2"></div>                       
+                    <div class="Favoritos">
+                        <label class="texto">Favoritos<br></label>
+                        <div class="scrollfavoritos">
+                            <?php {
+                                $sql = "SELECT * FROM gendy.negocios_favoritos JOIN gendy.negocio ON negocios_favoritos.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.usuario ON usuario.ID_USUARIO = negocios_favoritos.ID_USUARIO WHERE usuario.ID_USUARIO =:favorito";
+                                $datosFav = $DB->prepare($sql);
+                                $datosFav->execute(array(':favorito' => $_SESSION['user']));
+
+                                while ($dataFav = $datosFav->fetch()) {
+                                    ?>
+                                    <form method="post">
+                                        <input class="BotonServicios" type="submit" value="<?php echo $dataFav["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
                     </div>
                     <div class="Favoritos">
+                        <label class="texto">Citas Programadas<br></label>
+                        <div class="scrollfavoritos">
+                            <?php {
+                                $sql = "SELECT * FROM gendy.negocios_favoritos JOIN gendy.negocio ON negocios_favoritos.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.usuario ON usuario.ID_USUARIO = negocios_favoritos.ID_USUARIO WHERE usuario.ID_USUARIO =:favorito";
+                                $datosFav = $DB->prepare($sql);
+                                $datosFav->execute(array(':favorito' => $_SESSION['user']));
 
+                                while ($dataFav = $datosFav->fetch()) {
+                                    ?>
+                                    <form action="VisualizarNegocio.php" method="POST">
+                                        <input class="BotonServicios" type="submit" value="<?php echo $dataFav["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
                     </div>
-                    <div class="Citas Programadas">
+                    <div class="Servicios" id = "serv">
+                        <label class="texto">Servicios<br></label>
+                        <div class="scrollServicios">
+                            <?php
+                            if (isset($_POST['Fitness'])) {
+                                $sql = "SELECT * FROM gendy.pertenece JOIN gendy.negocio ON pertenece.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.categorias ON pertenece.ID_CATEGORIA = categorias.ID_CATEGORIA WHERE NOMBRE_CATEGORIA =:categoria";
+                                $datos = $DB->prepare($sql);
+                                $datos->execute(array(':categoria' => $_POST['Fitness']));
 
+                                while ($data = $datos->fetch()) {
+                                    ?>
+                                    <form action="VisualizarNegocio.php?Negocio=<?php echo $data["ID_NEGOCIO"]; ?>" method="POST">
+                                        <input class="BotonServicios" type="submit" value="<?php echo $data["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            if (isset($_POST['Restaurantes'])) {
+                                $sql = "SELECT * FROM gendy.pertenece JOIN gendy.negocio ON pertenece.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.categorias ON pertenece.ID_CATEGORIA = categorias.ID_CATEGORIA WHERE NOMBRE_CATEGORIA =:categoria";
+                                $datos = $DB->prepare($sql);
+                                $datos->execute(array(':categoria' => $_POST['Restaurantes']));
+
+                                while ($data = $datos->fetch()) {
+                                    ?>
+                                    <form action="VisualizarNegocio.php?Negocio=<?php echo $data["ID_NEGOCIO"]; ?>" method="POST">
+                                        <input class="BotonServicios" type="submit" value="<?php echo $data["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            if (isset($_POST['Bienestar'])) {
+                                $sql = "SELECT * FROM gendy.pertenece JOIN gendy.negocio ON pertenece.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.categorias ON pertenece.ID_CATEGORIA = categorias.ID_CATEGORIA WHERE NOMBRE_CATEGORIA =:categoria";
+                                $datos = $DB->prepare($sql);
+                                $datos->execute(array(':categoria' => $_POST['Bienestar']));
+
+                                while ($data = $datos->fetch()) {
+                                    ?>
+                                    <form action="VisualizarNegocio.php?Negocio=<?php echo $data["ID_NEGOCIO"]; ?>" method="POST">
+                                        <input class="BotonServicios" type="submit" value="<?php echo $data["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            if (isset($_POST['Mecánico'])) {
+                                $sql = "SELECT * FROM gendy.pertenece JOIN gendy.negocio ON pertenece.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.categorias ON pertenece.ID_CATEGORIA = categorias.ID_CATEGORIA WHERE NOMBRE_CATEGORIA =:categoria";
+                                $datos = $DB->prepare($sql);
+                                $datos->execute(array(':categoria' => $_POST['Mecánico']));
+
+                                while ($data = $datos->fetch()) {
+                                    ?>
+                                    <form action="VisualizarNegocio.php?Negocio=<?php echo $data["ID_NEGOCIO"]; ?>" method="POST">
+                                        <input class="BotonServicios" type="submit" value="<?php echo $data["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            if (isset($_POST['Belleza'])) {
+                                $sql = "SELECT * FROM gendy.pertenece JOIN gendy.negocio ON pertenece.ID_NEGOCIO = negocio.ID_NEGOCIO JOIN gendy.categorias ON pertenece.ID_CATEGORIA = categorias.ID_CATEGORIA WHERE NOMBRE_CATEGORIA =:categoria";
+                                $datos = $DB->prepare($sql);
+                                $datos->execute(array(':categoria' => $_POST['Belleza']));
+
+                                while ($data = $datos->fetch()) {
+                                    ?>
+                            <form action="VisualizarNegocio.php?Negocio=<?php echo $data["ID_NEGOCIO"]; ?>" method="POST" >
+                                        <input class="BotonServicios" type="submit" value="<?php echo $data["RAZON_SOCIAL"]; ?>" name='Servicio' onclick="" />
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
